@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchServiceService } from './search-service.service';
+import { SearchServiceService, RootObject } from './search-service.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -9,14 +9,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private itunes: SearchServiceService) {
+  results: RootObject[] = [];
 
+  constructor(private itunes: SearchServiceService) {}
+
+  async doSearch(term: string) {
+    const temp = await this.itunes.search(term);
+    this.results = temp;
+
+    console.log('app component');
+    console.log(this.results);
   }
-
-  doSearch(term: string) {
-    this.itunes.search(term);
-  }
-
 
   ngOnInit() {
   }
