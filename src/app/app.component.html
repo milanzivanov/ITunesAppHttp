@@ -1,6 +1,16 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<h1>
-    Welcome to {{ title }}!
-</h1>
+<form class="form-inline">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Enter search string" #search>
+  </div>
+  <button class="btn btn-primary" (click)="doSearch(search.value)">
+    Search
+  </button>
+</form>
+
+<ul>
+  <li *ngFor="let track of itunes.results">
+    {{track.trackName}}
+  </li>
+</ul>
 
 
