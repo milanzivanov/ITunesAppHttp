@@ -8,22 +8,19 @@ import 'rxjs/add/operator/map';
 export class SearchServiceService {
 
   apiRoot = 'https://itunes.apple.com/search';
-  // results: any;
-  // data: Object[];
   results: RootObject[];
   loading: boolean;
 
-  // question???
+  // konstruktor se prvi izvrsava!!!
   constructor(private http:
     HttpClient) {
-      // this.data = [];
       this.loading = false;
       this.results = [];
     }
 
     // async await
     async search(term: string): Promise<RootObject[]> {
-      const apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+      const apiURL = `${this.apiRoot}?term=${term}&media=music&limit=50`;
 
       const ids = await this.http.get(apiURL).map(res => this.results = res as RootObject[]).toPromise();
 
@@ -75,24 +72,6 @@ export class SearchServiceService {
     primaryGenreName: string;
     isStreamable: boolean;
   }
-  // // promises
-  // search(term: string) {
-  //   const promise = new Promise((resolve, reject) => {
-  //     //
-  //     const apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
-  //     this.http.get(apiURL)
-  //         .toPromise()
-  //         .then( res => {
-  //           // this.results = res;
-  //           this.results = res as Object[];
-  //           console.log(res);
-  //         }
-  //         );
-  //         resolve();
-  //       }
-  // );
-  //   return promise;
-  // }
 
 
 
