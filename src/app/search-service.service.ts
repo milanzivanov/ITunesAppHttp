@@ -10,7 +10,7 @@ export class SearchServiceService {
   apiRoot = 'https://itunes.apple.com/search';
   // results: any;
   // data: Object[];
-  results: any[];
+  results: RootObject[];
   loading: boolean;
 
   // question???
@@ -25,7 +25,7 @@ export class SearchServiceService {
     async search(term: string): Promise<RootObject[]> {
       const apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
 
-      const ids = await this.http.get(apiURL).map(response => this.results = response as any[]).toPromise();
+      const ids = await this.http.get(apiURL).map(res => this.results = res as RootObject[]).toPromise();
 
       return ids;
 
@@ -33,7 +33,7 @@ export class SearchServiceService {
 
   }
 
-  // if
+  // interface
 
   export interface RootObject {
     resultCount: number;

@@ -10,11 +10,16 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
 
   results: RootObject[] = [];
+  private loading = false;
+
 
   constructor(private itunes: SearchServiceService) {}
 
   async doSearch(term: string) {
+    this.loading = true;
     const temp = await this.itunes.search(term);
+    this.loading = false;
+
     this.results = temp;
 
     console.log('app component');
