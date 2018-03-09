@@ -34,7 +34,6 @@ export class SearchServiceService {
   }
 
   // interface
-
   export interface RootObject {
     resultCount: number;
     results: Result[];

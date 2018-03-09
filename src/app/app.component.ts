@@ -17,10 +17,8 @@ export class AppComponent implements OnInit {
 
   async doSearch(term: string) {
     this.loading = true;
-    const temp = await this.itunes.search(term);
+    this.results = await this.itunes.search(term);
     this.loading = false;
-
-    this.results = temp;
 
     console.log('app component');
     console.log(this.results);
