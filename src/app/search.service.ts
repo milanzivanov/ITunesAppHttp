@@ -25,29 +25,24 @@ export class SearchService {
   posts: SearchItem[];
   constructor(private http: HttpClient) { }
 
-  search(term: string): Observable<SearchItem> {
+  search(term: string): Observable<SearchItem[]> {
     const apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+
     return this.http.get(apiURL)
-    .map((result) => {
-      // return result as RootObject;
-      const temp = result as SearchItem[];
-      // transformation
-    console.log(temp);
-
-      return new SearchItem (
-        temp[0].artist,
-        temp[0].artistId,
-        temp[0].link,
-        temp[0].thumbnail,
-        temp[0].track
-        // temp.trackName,
-        // temp.artistName,
-        // temp.trackViewUrl,
-        // temp.artworkUrl30,
-        // temp.artistId
-      );
-      // return <RootObject>result;
+    .map(result => {
+      const set = result as {results: any[]};
+      console.log(result);
+      return set.results
+                .map(res => new SearchItem (
+                    res.trackName,
+                    res.artistName,
+                    res.link,
+                    res.thumbnail,
+                    res.track));
     });
-
   }
+
+
+
+
 }

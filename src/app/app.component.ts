@@ -10,7 +10,7 @@ import {ReactiveFormsModule, FormControl, FormsModule} from '@angular/forms';
 })
 export class AppComponent implements  OnInit {
   private loading = false;
-  private results: Observable<SearchItem>;
+  private results: SearchItem[];
   // private results: SearchItem[] = [];
   private searchField: FormControl;
 
@@ -20,22 +20,17 @@ export class AppComponent implements  OnInit {
 
   ngOnInit() {
     this.searchField = new FormControl();
-    this.results = this.searchField.valueChanges
+    this.searchField.valueChanges
         .debounceTime(400)
         .distinctUntilChanged()
         .do(_ => this.loading = true)
         .switchMap(term => this.itunes.search(term))
-        .do(_ => this.loading = false);
-
-
+        .do(_ => this.loading = false)
+        .subscribe(r => this.results = r);
   }
 
   doSearch(term: string) {
     this.itunes.search(term);
-    this.itunes.search(term).subscribe(res => {
-      // this.results = res;
-      console.log(res);
-    });
   }
 
 }

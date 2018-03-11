@@ -13,11 +13,8 @@
 
 <ul class="list-group">
   <li class="list-group-item"
-      *ngFor="let track of results | async">
-    <img src="{{temp.thumbnail}}">
-    <a target="_blank"
-        href="{{temp.link}}">{{ track.track }}
-    </a>
+      *ngFor="let track of results">
+    <p>{{track.track}}</p>
   </li>
 </ul>
 
