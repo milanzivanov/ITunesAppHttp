@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient,
+         HttpParams,
+         HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'my-root',
@@ -98,7 +101,39 @@ export class AppComponent {
     );
   }
 
+  // The full listing for sending a http request with header is like so:
+
   doGETWithHeaders() {
     console.log('GET WITH HEADERS');
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token-milan',
+        'Accept-Language': 'serbian'
+      })
+    };
+
+    const url = `${this.appRoot}/get`;
+
+    this.http.get(url, httpOptions).subscribe(
+    res => console.log(res),
+    msg => console.error(`Error: ${msg.status} ${msg.statusText}`)
+  );
+
   }
 }
+
+// codecraft.tv
+// doGETWithHeaders() {
+//   console.log("GET WITH HEADERS");
+//   let headers = new Headers();
+//   headers.append('Authorization', btoa    ('username:password'));
+//   let opts = new RequestOptions();
+//   opts.headers = headers;
+//   let url = `${this.apiRoot}/get`;
+//   this.http.get(url, opts).subscribe(
+//     res => console.log(res.json()),
+//     msg => console.error(`Error: ${msg.status} ${msg.statusText}`)
+//   );
+// }
