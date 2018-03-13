@@ -27,8 +27,7 @@ export class AppComponent {
       this.result = res;
       console.log(typeof(this.result));
       console.log(res);
-    }
-    );
+    });
   }
 
   doPOST() {
@@ -39,8 +38,20 @@ export class AppComponent {
     console.log('PUT');
   }
 
+  // tslint:disable-next-line:max-line-length
+  // To perform a DELETE request we just call the delete function. The format of the function is exactly the same as the get function above, we can even pass in query params like so:
   doDELETE() {
     console.log('DELETE');
+    console.log('GET');
+    const url = `${this.appRoot}/delete`;
+    const params = new HttpParams()
+          .set('logNamespace', 'logNamespace')
+          .set('foo', 'moo');
+    this.http.delete(url, {params: params}).subscribe( res => {
+      this.result = res;
+      console.log(typeof(this.result));
+      console.log(res);
+    });
   }
 
   doGETAsPromise() {
