@@ -40,8 +40,14 @@ export class AppComponent {
     );
   }
 
+  // To perform a PUT request we just call the put function. It works in exactly the same was as the post function above:
   doPUT() {
     console.log('PUT');
+    const url = `${this.appRoot}/put`;
+    const params = new HttpParams();
+    params.set('foo', 'moo');
+    params.set('limit', '25');
+    this.http.put(url, {moo: 'foo', goo: 'loo'}, {params}).subscribe(res => console.log(res));
   }
 
   // tslint:disable-next-line:max-line-length
@@ -58,16 +64,38 @@ export class AppComponent {
     });
   }
 
+  //   If you prefer to work with promises over observables it’s easy to convert between the two.
+
+  // We just call .toPromise() on the observable that gets returned and this will convert it into a promise instead, like so:
   doGETAsPromise() {
     console.log('GET AS PROMISE');
+    const url = `${this.appRoot}/get`;
+    this.http.get(url)
+        .toPromise()
+        .then(res => console.log(res)
+        );
   }
 
+  // We can simulate errors from our test server just by performing a GET on a POST endpoint, like so:
   doGETAsPromiseError() {
     console.log('GET AS PROMISE ERROR');
+    const url = `${this.appRoot}/post`;
+    this.http.get(url)
+      .toPromise()
+      .then(res => console.log(res),
+            msg => console.error(`${msg.status}  ${msg.statusText}`)
+    );
   }
 
+
+  // And in the case of an observable it looks like so:
   doGETAsObservableError() {
     console.log('GET AS OBSERVABLE ERROR');
+    const url = `${this.appRoot}/post`;
+    this.http.get(url).subscribe(
+      res => console.log(res),
+      msg => console.error(`Error: ${msg.status} ${msg.statusText}`)
+    );
   }
 
   doGETWithHeaders() {
