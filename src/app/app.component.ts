@@ -3,7 +3,6 @@ import { HttpClient,
          HttpParams,
          HttpHeaders } from '@angular/common/http';
 
-
 @Component({
   selector: 'my-root',
   templateUrl: './app.component.html',
@@ -89,7 +88,6 @@ export class AppComponent {
             msg => console.error(`${msg.status}  ${msg.statusText}`)
     );
   }
-
 
   // And in the case of an observable it looks like so:
   doGETAsObservableError() {
