@@ -56,10 +56,23 @@
 
 <div>
     <h4>Alternative syntax</h4>
+    <p>
+        We can also set a class on an element by binding to the input property binding called class, like so [class]="'text-success'"
+    </p>
     <ul *ngFor="let person of people">
         <li [class.text-success]="person.country === 'UK'"
             [class.text-primary]="person.country === 'USA'"
             [class.text-danger]="person.country === 'HK'">{{ person.name }} ({{ person.country }})
         </li>
       </ul>
+</div>
+
+<div>
+  <h3>NgNonBindable</h3>
+    <div>
+        To render the name variable we use this syntax <pre>{{ name }}</pre>
+      </div>
+      <div>
+          To render the name variable we use this syntax <pre ngNonBindable>{{ name }}</pre>
+        </div>
 </div>
