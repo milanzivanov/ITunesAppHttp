@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'http trening with promises(branch 1) and observarbles(branch 2) now ther is lot more branches of agular staff';
+
 }
