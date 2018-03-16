@@ -3,4 +3,46 @@
     Welcome to {{ title }}!
 </h1>
 
+<h4>ngIf</h4>
 
+<ul *ngFor="let person of people">
+  <li *ngIf="person.age > 30">
+    {{ person.name }} - {{ person.age }}
+  </li>
+</ul>
+
+<h4>ngIf</h4>
+
+<ul *ngFor="let person of people">
+  <li *ngIf="person.country === 'SER'"
+      class="text-success">
+    {{ person.name }} ({{ person.country }}
+  </li>
+  <li *ngIf="person.country === 'USA'"
+      class="text-primary">{{ person.name }} ({{ person.country }})
+  </li>
+  <li *ngIf="person.country === 'HK'"
+      class="text-danger">{{ person.name }} ({{ person.country }})
+  </li>
+  <li *ngIf="person.country !== 'HK' && person.country !== 'UK' && person.country !== 'USA'"
+      class="text-warning">{{ person.name }} ({{ person.country }})
+  </li>
+</ul>
+
+<h4>ngSwitch</h4>
+
+<ul *ngFor="let person of people"
+    [ngSwitch]="person.country">
+    <li *ngSwitchCase="'UK'"
+        class="text-success">{{ person.name }} ({{ person.country }})
+    </li>
+    <li *ngSwitchCase="'USA'"
+        class="text-primary">{{ person.name }} ({{ person.country }})
+    </li>
+    <li *ngSwitchCase="'HK'"
+        class="text-danger">{{ person.name }} ({{ person.country }})
+    </li>
+    <li *ngSwitchDefault
+        class="text-warning">{{ person.name }} ({{ person.country }})
+    </li>
+</ul>
