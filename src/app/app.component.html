@@ -1,38 +1,8 @@
+<my-header></my-header>
 <div class="container">
-  <div>
-    <div class="form-group"
-         style="padding: 10px 0 0 0">
-      <input type="text"
-             class="form-control"
-             placeholder="Enter search string"
-             (keyup.enter)="doSearch()"
-             [(ngModel)]="searchValue">
-    </div>
-    <button class="btn btn-primary btn-block"
-            style="margin: 10px 0"
-            (click)="doSearch()">
-      Search
-    </button>
+  <div class="m-t-1">
+    <router-outlet></router-outlet>
   </div>
-
-  <!-- loading -->
-  <div class="text-center">
-    <p class="lead"
-       *ngIf="loading">
-       Loading...
-    </p>
-  </div>
-
-  <ul class="list-group">
-    <li class="list-group-item"
-        *ngFor="let track of results.results">
-      <img src="{{track.artworkUrl30}}">
-      <a target="_blank"
-          href="{{track.trackViewUrl}}">{{ track.trackName }}
-      </a>
-    </li>
-  </ul>
-
 </div>
 
 
