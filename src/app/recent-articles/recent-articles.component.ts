@@ -9,6 +9,15 @@ class Article {
   }
 }
 
+// test123
+// domain model
+class Test {
+  constructor(public name: string,
+              public content: string,
+              public age: number) {
+  }
+}
+
 @Component({
   selector: 'my-recent-articles',
   templateUrl: './recent-articles.component.html',
@@ -23,6 +32,12 @@ export class RecentArticlesComponent implements OnInit {
     new Article('Title 4', new Date(), 'https://unsplash.it/400?image=20', 'image'),
     new Article('Title 5', new Date(), 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula', 'text'),
     new Article('Title 6', new Date(), 'https://unsplash.it/400?image=30', 'image')
+  ];
+
+  tests: Test[] = [
+    new Test('Milan', 'I learning angular', 35),
+    new Test('Ivan', 'Milan big brother', 36),
+    new Test('Marija', 'I learning also angular', 30),
   ];
 
   constructor() { }
