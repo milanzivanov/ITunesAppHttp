@@ -5,12 +5,14 @@
       <input type="text"
               class="form-control"
               placeholder="Enter search string"
-              (keyup.enter)="doSearch()"
+              (keyup.enter)="onSearch()"
               [(ngModel)]="searchValue">
     </div>
+    <!--  -->
+    <!-- (click)="doSearch()"> -->
     <button class="btn btn-primary btn-block"
             style="margin: 10px 0"
-            (click)="doSearch()">
+            (click)="onSearch()">
       Search
     </button>
   </div>

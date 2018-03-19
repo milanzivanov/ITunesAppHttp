@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchServiceService, RootObject } from '../search-service.service';
+import {ActivatedRoute, Routes, Router} from '@angular/router';
 
 @Component({
   selector: 'my-search',
@@ -12,7 +13,28 @@ export class SearchComponent implements OnInit {
   private loading = false;
   searchValue: string;
 
-  constructor(private itunes: SearchServiceService) {}
+  constructor(private itunes: SearchServiceService,
+              private route: ActivatedRoute,
+              private router: Router) {
+                this.route.params.subscribe( params => {
+
+                  // console.log(params);
+                  // this.doSearch();
+                  // p111
+                  if (this.searchValue) {
+                    this.doSearch();
+                  }
+                  // if (params['term']) {
+                  //   this.doSearch(params['term']);
+                  // }
+                });
+  }
+
+  // p111
+  onSearch() {
+    const term = this.searchValue;
+    this.router.navigate(['search', { term: term }]);
+  }
 
   async doSearch() {
     this.loading = true;
@@ -24,6 +46,7 @@ export class SearchComponent implements OnInit {
     // index[0].
     // console.log(this.results[0].results[0].artistName);
   }
+
 
   ngOnInit() {
   }
