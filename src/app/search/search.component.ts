@@ -18,15 +18,13 @@ export class SearchComponent implements OnInit {
               private router: Router) {
                 this.route.params.subscribe( params => {
 
-                  // console.log(params);
                   // this.doSearch();
-                  // p111
-                  if (this.searchValue) {
+                  // console.log(params);
+                  if (params['term']) {
+                    this.searchValue = params['term'];
                     this.doSearch();
                   }
-                  // if (params['term']) {
-                  //   this.doSearch(params['term']);
-                  // }
+
                 });
   }
 
