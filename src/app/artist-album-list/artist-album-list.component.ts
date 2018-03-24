@@ -11,12 +11,36 @@ import 'rxjs/add/operator/map';
 })
 export class ArtistAlbumListComponent implements OnInit {
 
-  private albums: RootObject[];
+  private albums: any;
+  // results: RootObject[];
 
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     private route: ActivatedRoute) {
-        this.route.parent.params.subscribe(params => console.log(params));
+        this.route.parent.params.subscribe(params => {
+          // console.log(params);
+          this.http.get(`https://itunes.apple.com/lookup?id=${params['artistId']}&entity=album`).toPromise().then(res => {
+            // this.albums = res.results.slice(1);
+            this.albums = res;
+            console.log(res);
+            console.log(this.albums);
+          });
+        });
     }
+
+  // constructor(
+  //   private http: HttpClient,
+  //   private route: ActivatedRoute) {
+  //       this.route.parent.params.subscribe(params => {
+  //         // console.log(params);
+  //         this.http.get(`https://itunes.apple.com/lookup?id=${params['artistId']}&entity=album`).map(res => {
+  //           // this.albums = res.results.slice(1);
+  //           this.albums = res as RootObject[];
+  //           console.log(res);
+  //           console.log(this.albums);
+  //         });
+  //       });
+  //   }
 
 
 ngOnInit() {

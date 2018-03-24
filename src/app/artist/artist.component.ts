@@ -11,30 +11,23 @@ import 'rxjs/add/operator/map';
 })
 export class ArtistComponent implements OnInit {
 
-  private artist: RootObject[];
+  private artist: any;
 
-  constructor(private http: HttpClient,
-              private route: ActivatedRoute) {
-                this.route.parent.params.subscribe(
-                  // params => console.log(params)
-                  // params => this.http.get(`https://itunes.apple.com/lookup?id=${params['artistId']}&entity=song`)
-                  params => this.http.get(`https://itunes.apple.com/lookup?${params['artistId']}`)
-                  .map(res => {
-                    const ids = this.artist = res as RootObject[];
-                    // return ids;
-                    // console.log(this.artist);
-                  }
-                  // const ids = await this.http.get(apiURL).map(res => this.results = res as RootObject[]).toPromise();
-
-                  // return ids;
-                  ).toPromise()
-                );
-              }
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute) {
+        this.route.parent.params.subscribe(params => {
+          // console.log(params);
+          this.http.get(`https://itunes.apple.com/lookup?id=${params['artistId']}`).toPromise().then(res => {
+            // this.albums = res.results.slice(1);
+            this.artist = res;
+            console.log(res);
+            console.log(this.artist);
+          });
+        });
+    }
 
   ngOnInit() {
-    // this._employeeService.getEmployees()
-    // .subscribe(data => this.employees = data,
-    //           error => this.errorMsg = error);
   }
 
 }

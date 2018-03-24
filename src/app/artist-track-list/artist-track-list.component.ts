@@ -11,12 +11,22 @@ import 'rxjs/add/operator/map';
 })
 export class ArtistTrackListComponent implements OnInit {
 
-  private tracks: RootObject[];
+  private tracks: any;
+  results: RootObject[];
 
-  constructor(private http: HttpClient,
-              private route: ActivatedRoute) {
-                  this.route.parent.params.subscribe(params => console.log(params));
-              }
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute) {
+        this.route.parent.params.subscribe(params => {
+          // console.log(params);
+          this.http.get(`https://itunes.apple.com/lookup?id=${params['artistId']}&entity=song`).toPromise().then(res => {
+            // this.albums = res.results.slice(1);
+            this.tracks = res;
+            console.log(res);
+            console.log(this.tracks);
+          });
+        });
+    }
 
 
   ngOnInit() {
