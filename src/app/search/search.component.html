@@ -25,7 +25,7 @@
     </p>
   </div>
 
-  <ul class="list-group">
+  <!-- <ul class="list-group">
     <li class="list-group-item"
         *ngFor="let track of results.results">
       <img src="{{track.artworkUrl30}}">
@@ -33,6 +33,15 @@
           href="{{track.trackViewUrl}}">{{ track.trackName }}
       </a>
     </li>
-  </ul>
+  </ul> -->
+
+<div class="list-group">
+  <a [routerLink]="['/artist', track.artistId]"
+     class="list-group-item list-group-item-action"
+     *ngFor="let track of results.results">
+    <img src="{{track.artworkUrl30}}">
+    {{ track.trackName }} <span class="text-muted">by</span> {{ track.artistName }}
+  </a>
+</div>
 
 </div>

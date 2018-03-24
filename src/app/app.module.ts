@@ -9,13 +9,24 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
+import { ArtistComponent } from './artist/artist.component';
+import { ArtistTrackListComponent } from './artist-track-list/artist-track-list.component';
+import { ArtistAlbumListComponent } from './artist-album-list/artist-album-list.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'find', redirectTo: 'search'},
   {path: 'home', component: HomeComponent},
   {path: 'search', component: SearchComponent},
-  // {path: 'search/:term', component: SearchComponent},
+  {
+    path: 'artist/:artistId',
+    component: ArtistComponent,
+    children: [
+      {path: '', redirectTo: 'tracks', pathMatch: 'full'},
+      {path: 'tracks', component: ArtistTrackListComponent},
+      {path: 'albums', component: ArtistAlbumListComponent},
+    ]
+  },
   {path: '**', component: HomeComponent}
 ];
 
@@ -24,7 +35,10 @@ const routes: Routes = [
     AppComponent,
     HeaderComponent,
     SearchComponent,
-    HomeComponent
+    HomeComponent,
+    ArtistComponent,
+    ArtistTrackListComponent,
+    ArtistAlbumListComponent
   ],
   imports: [
     BrowserModule,
